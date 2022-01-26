@@ -1,69 +1,56 @@
-body, html {
-	padding: 0;
-	margin: 0;
-	background-color: teal;
-}
+* {
+    padding: 0;
+    margin: 0;
+    }
+body {
+    perspective: 900px; /*Удаленность пользователя от центра объекта / от точки, вокруг которой вращается куб*/
+    perspective-origin: center -5em; /*Точка, с которой пользователь наблюдает объект. Под углом 180 градусов -5em по оси X.*/
+    }
 .container {
-	width: 950px;
-	margin: 0 auto;
-	background-color: #ccc;
-}
-aside.rightSide {
-	width: 200px;
-	float: right;
-}
-aside.rightSide ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 15px;
-}
-aside.rightSide ul > li > a {
-	text-decoration: none;
-	color: black;
-	font-size: 18px;
-	border: 1px solid #fefefe;
-	display: block;
-	padding: 15px 30px;
-	text-align: center;
-}
-aside.rightSide ul > li > a:hover {
-	font-weight: bold;
-	background-color: teal;
-	color: #fefefe;
-	font-size: 18px;
-}
-article {
-	width: 748px;
-	float: left;
-	border-left: 1px solid #fefefe;
-	border-right: 1px solid #fefefe;
-	counter-reset: list 0;
-	padding-bottom: 15px;
-}
-section {
-	margin-bottom: 72px;
-	padding-left: 15px;
-	padding-right: 30px;
-}
-section:first-child > h3 {
-	margin-top: 0;
-	padding-top: 30px; 
-}
-section > h3 > span:before {
-	counter-increment: list;
-	content: "Статья " counter(list) ": ";
-}
-section a {
-	text-align: center;
-	float: right;
-	display: inline-block;
-	background-color: red;
-	padding: 10px 18px;
-	color: #fff;
-	text-decoration: none;
-}
-footer {
-	border: 1px solid #fefefe;
-	text-align: center;
-	clear: both;
-}	    
+    transform-style: preserve-3d; /*Определение 3D свойства объекта*/
+    animation: rotate 10s infinite linear; /*Название анимации + время выполнения цикла + зацикливание + кривая скорости выполнения*/
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    top: 100px;
+    left:250px;
+    }
+@keyframes rotate {
+    100% {
+    transform: rotate3d(0, 1, 0, 360deg); /*Вращение в 3D по оси x (которая на самом деле y) с полным оборотом вокруг своей оси */
+    }
+    }
+div.side {
+    width: 200px; 
+    height: 200px;
+    background-color: #ccc;
+    position: absolute;
+    outline: 1px solid #000;
+    outline-offset: 25px; /*Сдвиг контуров всех сторон на 25px*/
+    opacity: 0.8; /*Прозрачность*/
+    }
+.front {
+    background: url("https://cdn.pixabay.com/photo/2020/08/31/20/23/abstract-background-5533525_960_720.jpg");
+    }
+    /*Дальше идет описание изменения положения каждой из сторон по отношению к .front для создания куба*/
+.left {
+    transform: translateX(-100px) rotateY(90deg) translateX(100px); /*сдвинуть на 100пкс влево, повернуть на 90градусов, сдвинуть на 100пкс вправо*/
+    background: url("https://cdn.pixabay.com/photo/2020/08/31/20/23/abstract-background-5533525_960_720.jpg");
+    }
+.right {
+    transform: translateX(100px) rotateY(90deg) translateX(100px); /*сдвинуть на 100пкс вправо, повернуть на 90градусов, сдвинуть на 100пкс вправо*/
+    background: url("https://cdn.pixabay.com/photo/2020/08/31/20/23/abstract-background-5533525_960_720.jpg");
+    }
+.up {
+    transform: translateY(-100px) rotateX(90deg) translateY(-100px); /*сдвинуть вверх на 100пкс, повернуть на 90градусов, сдвинуть вверх на 100пкс*/
+    background: url("https://cdn.pixabay.com/photo/2020/08/31/20/23/abstract-background-5533525_960_720.jpg");
+    }
+.down {
+    transform: translateY(100px) rotateX(90deg) translateY(-100px); /*сдвинуть вниз на 100пкс, повернуть на 90градусов, сдвинуть вверх на 100пкс*/
+    background: url("https://cdn.pixabay.com/photo/2020/08/31/20/23/abstract-background-5533525_960_720.jpg");
+    }
+.back {
+    transform: translateZ(-200px); /*сдвинуть по оси z назад на 200пкс*/
+    background: url("https://cdn.pixabay.com/photo/2020/08/31/20/23/abstract-background-5533525_960_720.jpg");
+    }
